@@ -55,8 +55,8 @@ public interface AssertHandler {
      * @param object 入参
      * @author zfj
      */
-    default void isNull(Object object) {
-        if (object != null) {
+    default void throwIfNull(Object object) {
+        if (null == object) {
             throw newException();
         }
     }
@@ -68,8 +68,8 @@ public interface AssertHandler {
      * @param message 异常信息
      * @author zfj
      */
-    default void isNull(Object object, String message) {
-        if (object != null) {
+    default void throwIfNull(Object object, String message) {
+        if (null == object) {
             throw newException(message);
         }
     }
@@ -81,9 +81,36 @@ public interface AssertHandler {
      * @param messageSupplier 异常信息表达式
      * @author zfj
      */
-    default void isNull(Object object, Supplier<String> messageSupplier) {
-        if (object != null) {
+    default void throwIfNull(Object object, Supplier<String> messageSupplier) {
+        if (null == object) {
             throw newException(nullSafeGet(messageSupplier));
+        }
+    }
+
+    /**
+     * 断言
+     *
+     * @param f 断言函数
+     * @author zfj
+     * @date 2022/5/18
+     */
+    default void throwIfTrue(AssertFunction f) {
+        boolean check = f.check();
+        if (check) {
+            throw newException();
+        }
+    }
+
+    /**
+     * 断言
+     *
+     * @param check 断言结果
+     * @author zfj
+     * @date 2022/5/18
+     */
+    default void throwIfTrue(boolean check) {
+        if (check) {
+            throw newException();
         }
     }
 }

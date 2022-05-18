@@ -49,9 +49,15 @@ class CaffeineApplicationTests {
     @Test
     void test1(){
         String s = new String();
-        BusinessExceptionEnum.NOT_EXIST.isNull(s);
-        BusinessExceptionEnum.NOT_EXIST.isNull(s,()->{
-            return "222";
+//        System.out.println("测试isNull判断");
+//        BusinessExceptionEnum.NOT_EXIST.isNull(s);
+//        System.out.println("测试异常信息定义");
+//        BusinessExceptionEnum.NOT_EXIST.isNull(s,()->{
+//            return "222";
+//        });
+        System.out.println("测试断言");
+        BusinessExceptionEnum.NOT_EXIST.throwIfTrue(()->{
+            return true;
         });
     }
 
